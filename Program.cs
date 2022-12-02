@@ -1,5 +1,5 @@
 ﻿
-Runner runner = new (2021);
+Runner runner = new (2022);
 
 await runner.Run(runner.LatestDay);
 
