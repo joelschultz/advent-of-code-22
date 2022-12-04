@@ -1,0 +1,26 @@
+﻿<Properties StartupConfiguration="{3948D12C-51E1-4CDF-9EA2-E6E21D06CEB1}|Default">
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.AdventOfCode PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Days/Day3.cs">
+    <Files>
+      <File FileName="Program.cs" Line="6" Column="19" />
+      <File FileName="Days/TemplateDay (copy).cs" Line="26" Column="28" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="AdventOfCode" expanded="True">
+            <Node name="AdventOfCode" expanded="True">
+              <Node name="Days" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
