@@ -27,26 +27,23 @@
         public override object Solve2(string raw) {
             var input = Transform(raw);
 
-
             for(int i = 13; i < input.Length; i++) {
-                if(!GetIsUnique(input, i)) {
+                if(!GetIsMarkerAtLocation(input, i)) {
                     return i + 1;
                 }
             }
-            
             return -1;
         }
-        private static bool GetIsUnique(string input, int startNumber) {
+        private static bool GetIsMarkerAtLocation(string input, int startNumber) {
             int endNumber = startNumber - 12;
-                int maxToCheck = 13;
+            int maxToCheck = 13;
             for(int index = startNumber; index > endNumber; index--) {
-                for(int j = 1; j <= maxToCheck ; j++) {
+                for(int j = 1; j <= maxToCheck; j++) {
                     if(input[index] == input[index - j]) {
                         return true;
                     }
                 }
                 maxToCheck -= 1;
-
             }
             return false;
         }
