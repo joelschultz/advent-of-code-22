@@ -1,4 +1,6 @@
-﻿namespace Days {
+﻿using System.IO;
+
+namespace Days {
     public class Day7 : DaySolverBase {
         public override string Example1 =>
             @"$ cd /
@@ -28,7 +30,6 @@ $ ls
         struct Directory {
             public Dictionary<string, Directory> directories;
             public Dictionary<string, int> files;
-            public string parentDirectoryName;
         }
 
         
@@ -92,28 +93,97 @@ $ ls
             return outermostDirectory;
         }
 
+         
         public override object Solve1(string raw) {
-            var outermostDirectory = Transform(raw);
+            Directory outermostDirectory = Transform(raw);
+            List<Directory> directoriesToDelete = new List<Directory>();
 
-            foreach(KeyValuePair<string, Directory> directory in outermostDirectory.directories) {
-                Console.WriteLine(directory.Key);
-                int totalFileSize = 0;
-                foreach(var file in directory.Value.files) {
-                    totalFileSize += file.Value;
-                }
-                foreach(var childDirectory in directory.Value.directories) {
-                    foreach(var file in childDirectory.Value.files) {
-                        totalFileSize += file.Value;
-                    }
-                }
+            int totalFileSize = 0;
+            AddDirectoriesToDelete(outermostDirectory, directoriesToDelete);
+            foreach (var directory in directoriesToDelete)
+            {
+                totalFileSize += GetFileSizeSum(directory);
             }
             return outermostDirectory;
         }
 
-        public override object Solve2(string raw) {
-            var input = Transform(raw);
+        private static int GetFileSizeSum(Directory directoryToDelete) {
+            int fileSizeInDirectory = 0;
+            foreach(var directory in directoryToDelete.directories) {
+                fileSizeInDirectory += GetFileSizeSum(directory.Value);
+            }
+            foreach (var file in directoryToDelete.files)
+            {
+                fileSizeInDirectory += file.Value;
+            }
+            return fileSizeInDirectory;
+        }
 
-            return -1;
+        private static int AddDirectoriesToDelete(Directory directory, List<Directory> directoriesToDelete) {
+            int totalFileSizeInDirectory = 0;
+            foreach(var file in directory.files) {
+                totalFileSizeInDirectory += file.Value;
+            }
+            foreach (var childDirectory in directory.directories)
+            {
+                totalFileSizeInDirectory += AddDirectoriesToDelete(childDirectory.Value, directoriesToDelete);
+            }
+            if (totalFileSizeInDirectory <= 100000)
+            {
+                directoriesToDelete.Add(directory);
+            }
+
+            return totalFileSizeInDirectory;
+        }
+
+
+
+
+
+        public override object Solve2(string raw) {
+            Directory outermostDirectory = Transform(raw);
+            List<int> possibleDirectoriesToDelete = new List<int>();
+
+            int totalFileSize = GetFileSizeSum(outermostDirectory);
+            int spaceLeft = 70000000 - totalFileSize;
+            int spaceNeeded = 30000000 - spaceLeft;
+            FindDirectoryToDelete(outermostDirectory, possibleDirectoriesToDelete, spaceNeeded);
+            int freedSpace = possibleDirectoriesToDelete[0];
+
+
+            return freedSpace;
+        }
+
+        private static int FindDirectoryToDelete(Directory directory, List<int> possibleDirectoriesToDelete, int spaceNeeded)
+        {
+            int totalFileSizeInDirectory = 0;
+            foreach (var file in directory.files)
+            {
+                totalFileSizeInDirectory += file.Value;
+            }
+            foreach (var childDirectory in directory.directories)
+            {
+                totalFileSizeInDirectory += FindDirectoryToDelete(childDirectory.Value, possibleDirectoriesToDelete, spaceNeeded);
+            }
+            if (totalFileSizeInDirectory >= spaceNeeded)
+            {
+                if (possibleDirectoriesToDelete.Count > 0)
+                {
+                    if (totalFileSizeInDirectory < possibleDirectoriesToDelete[0])
+                    {
+                        possibleDirectoriesToDelete.RemoveAt(0);
+                        possibleDirectoriesToDelete.Add(totalFileSizeInDirectory);
+                    }
+                }
+                else
+                {
+
+                    possibleDirectoriesToDelete.Add(totalFileSizeInDirectory);
+                }
+
+            }
+
+            return totalFileSizeInDirectory;
         }
     }
 }

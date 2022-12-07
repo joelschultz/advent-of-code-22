@@ -1,14 +1,13 @@
 ﻿<Properties StartupConfiguration="{3948D12C-51E1-4CDF-9EA2-E6E21D06CEB1}|Default">
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.ItemProperties.AdventOfCode PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Days/Day3.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Util/Runner.cs">
     <Files>
-      <File FileName="Program.cs" Line="6" Column="19" />
-      <File FileName="Days/TemplateDay (copy).cs" Line="26" Column="28" />
+      <File FileName="Program.cs" Line="4" Column="1" />
+      <File FileName="Days/Day3.cs" Line="68" Column="31" />
+      <File FileName="Days/Day4.cs" Line="89" Column="1" />
+      <File FileName="Days/Day7.cs" Line="1" Column="1" />
+      <File FileName="Util/Runner.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -16,11 +15,20 @@
           <Node name="AdventOfCode" expanded="True">
             <Node name="AdventOfCode" expanded="True">
               <Node name="Days" expanded="True" />
+              <Node name="Util" expanded="True">
+                <Node name="Runner.cs" selected="True" />
+              </Node>
             </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/joel/GitHub/advent-of-code-22/Days/Day7.cs" relfile="Days/Day7.cs" line="92" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.AdventOfCode PreferredExecutionTarget="MonoDevelop.Default" />
+  <MultiItemStartupConfigurations />
 </Properties>
