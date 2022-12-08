@@ -91,8 +91,26 @@ namespace Days {
         }
         
         public override object Solve2(string raw) {
-            var input = Transform(raw);
+            int[][] input = Transform(raw);
 
+            List<int> scores = new List<int>();
+            for(int heightIndex = 1; heightIndex < input.Length - 1; heightIndex++) {
+                int[] row = input[heightIndex];
+                for(int widthIndex = 1; widthIndex < row.Length - 1; widthIndex++) {
+                    scores.Add(CheckTreeScore(input, heightIndex, widthIndex));
+                }
+            }
+            return -1;
+        }
+
+        public int CheckTreeScore(int[][] doubleArray, int heightIndex, int widthIndex) {
+            int currentTreeHeight = doubleArray[heightIndex][widthIndex];
+            bool isVisibleFromDirection = true;
+            for(int i = heightIndex + 1; i < doubleArray.Length; i++) {
+                if(currentTreeHeight <= doubleArray[i][widthIndex]) {
+                    isVisibleFromDirection = false;
+                }
+            }
             return -1;
         }
     }
