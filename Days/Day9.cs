@@ -41,6 +41,14 @@ R 2";
                 x = anX;
                 y = aY;
             }
+
+            public bool IsMorethanOneAway(Position otherPosition) {
+                if(Math.Abs(x - otherPosition.x) > 1 || Math.Abs(y - otherPosition.y) > 1 ) {
+                    return true;
+                }
+                return false;
+
+            }
             public int x;
             public int y;
         }
@@ -49,8 +57,51 @@ R 2";
 
             HashSet<Position> visitedTiles = new HashSet<Position>();
             visitedTiles.Add(new Position(0,0));
-
+            Position tailPos = new Position(0,0);
+            Position headPos = new Position(0,0);
             foreach(var instruction in input) {
+                Position nextHeadPos = new Position(headPos.x, headPos.y);
+
+                if(instruction[0] > 0) {
+                    for(int i = 0; i < instruction[0]; i++) {
+                        nextHeadPos.x += 1;
+                        if(nextHeadPos.IsMorethanOneAway(tailPos)) {
+                            tailPos = headPos;
+                            visitedTiles.Add(tailPos);
+                        }
+                        headPos = nextHeadPos;
+                    }
+                }
+                else if(instruction[0] < 0) {
+                    for(int i = 0; i < Math.Abs(instruction[0]); i++) {
+                        nextHeadPos.x -= 1;
+                        if(nextHeadPos.IsMorethanOneAway(tailPos)) {
+                            tailPos = headPos;
+                            visitedTiles.Add(tailPos);
+                        }
+                        headPos = nextHeadPos;
+                    }
+                }
+                else if(instruction[1] > 0) {
+                    for(int i = 0; i < instruction[1]; i++) {
+                        nextHeadPos.y += 1;
+                        if(nextHeadPos.IsMorethanOneAway(tailPos)) {
+                            tailPos = headPos;
+                            visitedTiles.Add(tailPos);
+                        }
+                        headPos = nextHeadPos;
+                    }
+                }
+                else if(instruction[1] < 0) {
+                    for(int i = 0; i < Math.Abs(instruction[1]); i++) {
+                        nextHeadPos.y -= 1;
+                        if(nextHeadPos.IsMorethanOneAway(tailPos)) {
+                            tailPos = headPos;
+                            visitedTiles.Add(tailPos);
+                        }
+                        headPos = nextHeadPos;
+                    }
+                }
                 
             }
             
