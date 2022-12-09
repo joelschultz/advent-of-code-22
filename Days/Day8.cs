@@ -93,25 +93,55 @@ namespace Days {
         public override object Solve2(string raw) {
             int[][] input = Transform(raw);
 
-            List<int> scores = new List<int>();
+            int highestScore = 0;
             for(int heightIndex = 1; heightIndex < input.Length - 1; heightIndex++) {
                 int[] row = input[heightIndex];
                 for(int widthIndex = 1; widthIndex < row.Length - 1; widthIndex++) {
-                    scores.Add(CheckTreeScore(input, heightIndex, widthIndex));
+                    int score = CheckTreeScore(input, heightIndex, widthIndex);
+                    if(score > highestScore) {
+                        highestScore = score;
+                    }
                 }
             }
-            return -1;
+            return highestScore;
         }
 
         public int CheckTreeScore(int[][] doubleArray, int heightIndex, int widthIndex) {
             int currentTreeHeight = doubleArray[heightIndex][widthIndex];
-            bool isVisibleFromDirection = true;
+            int treesVisibleNorth = 0;
             for(int i = heightIndex + 1; i < doubleArray.Length; i++) {
+                treesVisibleNorth += 1;
                 if(currentTreeHeight <= doubleArray[i][widthIndex]) {
-                    isVisibleFromDirection = false;
+                    break;
                 }
             }
-            return -1;
+            
+            int treesVisibleSouth = 0;
+            for(int i = heightIndex - 1; i >= 0; i--) {
+                treesVisibleSouth += 1;
+                if(currentTreeHeight <= doubleArray[i][widthIndex]) {
+                    break;
+                }
+            }
+            
+            int treesVisibleEast = 0;
+            for(int i = widthIndex + 1; i < doubleArray[0].Length; i++) {
+                treesVisibleEast += 1;
+                if(currentTreeHeight <= doubleArray[heightIndex][i]) {
+                    break;
+                }
+            }
+            
+            int treesVisibleWest = 0;
+            for(int i = widthIndex - 1; i >= 0; i--) {
+                treesVisibleWest += 1;
+                if(currentTreeHeight <= doubleArray[heightIndex][i]) {
+                    break;
+                }
+            }
+            
+            
+            return treesVisibleNorth * treesVisibleSouth * treesVisibleEast * treesVisibleWest;
         }
     }
 }
