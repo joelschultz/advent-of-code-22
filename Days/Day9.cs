@@ -16,18 +16,19 @@ R 2";
             List<int[]> instructions = new List<int[]>();
             foreach(var row in rows) {
                 int[] instruction = new int [] {0,0};
-                switch(row[0]) {
-                    case 'R':
-                        instruction[0] = int.Parse(row[2].ToString());
+                string[] rowInstruction = row.Split(" ").ToArray<string>();
+                switch(rowInstruction[0]) {
+                    case "R":
+                        instruction[0] = int.Parse(rowInstruction[1].ToString());
                         break;
-                    case 'L':
-                        instruction[0] = -int.Parse(row[2].ToString());
+                    case "L":
+                        instruction[0] = -int.Parse(rowInstruction[1].ToString());
                         break;
-                    case 'U':
-                        instruction[1] = int.Parse(row[2].ToString());
+                    case "U":
+                        instruction[1] = int.Parse(rowInstruction[1].ToString());
                         break;
-                    case 'D':
-                        instruction[1] = -int.Parse(row[2].ToString());
+                    case "D":
+                        instruction[1] = -int.Parse(rowInstruction[1].ToString());
                         break;
                 }
                 instructions.Add(instruction);
